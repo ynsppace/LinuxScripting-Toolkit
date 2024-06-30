@@ -1,0 +1,4 @@
+---
+# vars file for installzabbix-proxy
+zabbix_server: "{{ zabbix_server_parameter }}"
+zabbix_proxy_hostname: "{{ zabbix_proxy_hostname_parameter }}"

@@ -1,0 +1,30 @@
+---
+# tasks file for installzabbix-agent
+- name: Install Zabbix Agent package
+  ansible.builtin.package:
+    name: zabbix-agent
+    state: present
+
+- name: Copy Zabbix Agent config file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/zabbix_agentd.conf"
+    dest: /etc/zabbix/zabbix_agentd.conf
+    mode: '0644'
+
+- name: Add Server parameter to Zabbix Agent config
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    line: "Server={{ zabbix_server }}"
+    insertafter: EOF
+
+- name: Add Hostname parameter to Zabbix Agent config
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    line: "Hostname={{ zabbix_agent_hostname }}"
+    insertafter: EOF
+
+- name: Enable and start Zabbix Proxy service
+  ansible.builtin.service:
+    name: zabbix-agent
+    state: started
+    enabled: true

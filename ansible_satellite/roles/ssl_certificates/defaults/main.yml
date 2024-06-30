@@ -1,0 +1,5 @@
+---
+# defaults file for ssl_certificates
+# roles/your_role/defaults/main.yml
+ssl_certificates_ansible_become: true
+ssl_certificates_ansible_become_user: root

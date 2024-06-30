@@ -1,0 +1,10 @@
+---
+# Baseado em https://www.redhat.com/sysadmin/configure-ca-trust-list
+- name: Copy CA certificate files
+  ansible.builtin.copy:
+    src: '{{ item }}'
+    dest: /etc/pki/ca-trust/source/anchors/
+    mode: '644'
+  with_fileglob: 'files/*'
+  notify:
+    - Update CA Trust

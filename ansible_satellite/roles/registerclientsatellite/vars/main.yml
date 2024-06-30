@@ -1,0 +1,21 @@
+---
+# vars file for registerClientSatellite
+registerclientsatellite_organization_id: 'Ascendi'
+
+registerclientsatellite_url_key_rhel7: >
+  "curl -sS --insecure 'https://satellite/register?activation_keys=RHEL7+Activation+Key&force=true&ignore_subman_errors=true&lifecycle_environment_id=1
+  &organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE3MDU1ODk4NjcsImp0aSI6ImRiMmQ4YTE2M
+  WI1MWM4ODNiMjFjMWE2N2M4NmI0OGJmZjU0NGI2YmJiZjdiODYyMzhjMDE3ZmVjYzgxZGYyMmQiLCJzY29wZSI6InJlZ2lzdHJhdGlvbiNnbG9iYWwgcmVnaXN0cmF0aW9uI2hvc3QifQ.SkvUTJ3Pr
+  dkjZX7mvafKfLtEcdUP7UKnXBDEkCIRMtc' | bash"
+
+registerclientsatellite_url_key_rhel8: >
+  "curl -sS --insecure 'https://satellite/register?activation_keys=RHEL8+Activation+Key&force=true&ignore_subman_errors=true&lifecycle_environment_id=1
+  &organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE3MDU1OTc3NzMsImp0aSI6ImM5MWUzMmFlM
+  TRjZjE0MTEzYmYwYWQ2OGZiNjdmOWIwNzlkMmE4ZTQ3YjAwYzgwYWFlMGU3N2ExNWQ0YWYwZWMiLCJzY29wZSI6InJlZ2lzdHJhdGlvbiNnbG9iYWwgcmVnaXN0cmF0aW9uI2hvc3QifQ.hikAEfx8V
+  T9nd6JkR858aZmHB9ZMZyOKWBwhmk5ETa4' | bash"
+
+registerclientsatellite_url_key_rhel9: >
+  "curl -sS --insecure 'https://satellite/register?activation_keys=RHEL9+Activation+Key&force=true&ignore_subman_errors=true&lifecycle_environment_id=1
+  &organization_id=1&update_packages=false' -H 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo1LCJpYXQiOjE3MDU1ODk5MzQsImp0aSI6ImJjMGE3ZDZk
+  M2RmMWRmMjEwYzUwZDY4OTczYTJjOGExMmVlY2JhZDIyNDA0ZTNhMWJkNWU4YzY2YzQ2MmQ0ZWUiLCJzY29wZSI6InJlZ2lzdHJhdGlvbiNnbG9iYWwgcmVnaXN0cmF0aW9uI2hvc3QifQ.15UgEUy
+  FhO4IRPhM7rqYCZ6gT8WRTIljtXsxy6EEQuo' | bash"

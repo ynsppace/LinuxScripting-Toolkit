@@ -1,0 +1,6 @@
+---
+- name: Install ODBC Libraries
+  hosts: "*"
+  become: true
+  roles:
+    - installodbc

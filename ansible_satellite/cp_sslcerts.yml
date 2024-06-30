@@ -1,0 +1,6 @@
+---
+- name: Configure CA-Trust certificates
+  hosts: '*'
+  become: true
+  roles:
+    - ssl_certificates

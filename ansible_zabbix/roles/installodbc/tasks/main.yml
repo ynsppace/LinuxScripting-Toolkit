@@ -1,0 +1,63 @@
+---
+# tasks file for installodbc
+- name: Download appropriate package for RHEL 7
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/config/rhel/7/prod.repo
+    dest: /etc/yum.repos.d/mssql-release.repo
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '7'
+
+- name: Download appropriate package for RHEL 8
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/config/rhel/8/prod.repo
+    dest: /etc/yum.repos.d/mssql-release.repo
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '8'
+
+- name: Download appropriate package for RHEL 9
+  ansible.builtin.get_url:
+    url: https://packages.microsoft.com/config/rhel/9/prod.repo
+    dest: /etc/yum.repos.d/mssql-release.repo
+    owner: root
+    group: root
+    mode: '0644'
+  when: ansible_distribution == 'RedHat' and ansible_distribution_major_version == '9'
+
+- name: Remove conflicting packages
+  ansible.builtin.dnf:
+    name:
+      - unixODBC-utf16
+      - unixODBC-utf16-devel
+    state: absent
+
+- name: Install msodbcsql17
+  ansible.builtin.dnf:
+    name: msodbcsql17
+    state: present
+
+- name: Install mssql-tools (optional)
+  ansible.builtin.dnf:
+    name: mssql-tools
+    state: present
+
+- name: Add mssql-tools to PATH
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    line: 'export PATH="$PATH:/opt/mssql-tools/bin"'
+
+- name: Install unixODBC-devel (optional)
+  ansible.builtin.dnf:
+    name: unixODBC-devel
+    state: present
+
+- name: Copy odbc.ini configuration file to /etc/obdc.ini
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/odbc.ini"
+    dest: /etc/odbc.ini
+    owner: root
+    group: root
+    mode: '0644'

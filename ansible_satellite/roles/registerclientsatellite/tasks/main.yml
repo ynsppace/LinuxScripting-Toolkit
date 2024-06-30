@@ -1,0 +1,53 @@
+---
+# tasks file for registerClientSatellite
+- name: Remove all info from Subscription Manager
+  ansible.builtin.command: subscription-manager remove --all
+  changed_when: false
+
+- name: Unregister from Subscription Manager
+  ansible.builtin.command: subscription-manager unregister
+  changed_when: false
+
+- name: Delete katello-server-ca.pem
+  ansible.builtin.file:
+    path: /etc/rhsm/ca/katello-server-ca.pem
+    state: absent
+  changed_when: false
+
+- name: Clean cache from Subscription Manager
+  ansible.builtin.command: subscription-manager clean
+  changed_when: false
+
+- name: Clean Yum Cache
+  ansible.builtin.command: yum clean all
+  changed_when: false
+
+- name: Register with Red Hat Satellite and auto-attach (RHEL 7)
+  ansible.builtin.uri:
+    url: '{{ url_key_rhel7 }}'
+    method: GET
+  when:
+    - ansible_distribution == 'RedHat'
+    - ansible_distribution_major_version == '7'
+
+- name: Register with Red Hat Satellite and auto-attach (RHEL 8)
+  ansible.builtin.uri:
+    url: '{{ url_key_rhel8 }}'
+    method: GET
+  when:
+    - ansible_distribution == 'RedHat'
+    - ansible_distribution_major_version == '8'
+
+- name: Register with Red Hat Satellite and auto-attach (RHEL 9)
+  ansible.builtin.uri:
+    url: '{{ url_key_rhel9 }}'
+    method: GET
+  when:
+    - ansible_distribution == 'RedHat'
+    - ansible_distribution_major_version == '9'
+
+- name: Refresh data Subscription-manager
+  ansible.builtin.redhat_subscription:
+    state: refresh
+  when: ansible_distribution == 'RedHat'
+  notify: restart rhsm

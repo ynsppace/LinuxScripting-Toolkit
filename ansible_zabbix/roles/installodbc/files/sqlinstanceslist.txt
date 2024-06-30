@@ -1,0 +1,32 @@
+###################################
+# List of SQL Instances Available #
+#       Date: 03/06/2024          #
+###################################
+
+SRVPRDSQLINT.gca.ad.root
+SRVDEVSQLINT.gca.ad.root
+SRVPRDSQL12.gca.ad.root
+srvascdbg1.gca.ad.root\dbg1
+srvascdbg2.gca.ad.root\dbg2 
+srvascdbg3.gca.ad.root\dbg3 
+srvascdbg4.gca.ad.root\dbg4
+lsnprdsql1.caerus.ad.root
+lsnprdsql2.caerus.ad.root
+lsnprdsql3.caerus.ad.root
+lsnprdsql4.caerus.ad.root
+srvqtrack.gca.ad.root
+srvclndbg1.caerus.ad.root\clnsql1
+srvclndbg2.caerus.ad.root\clnsql2
+srvclndbg3.caerus.ad.root\clnsql3
+lsntstsql1.caerus.ad.root
+lsntstsql2.caerus.ad.root
+lsntstsql3.caerus.ad.root
+lsntstsql4.caerus.ad.root
+srvdevdbe1.caerus.ad.root\devsql1
+srvdevdbe1.caerus.ad.root\devsql2
+srvdevdbe1.caerus.ad.root\devsql3
+srvdevdbe1.caerus.ad.root\devsql4
+srvsqlrpa.gca.ad.root
+srvqaocr.gca.ad.root\SQLEXPRESS
+sqlprod.c1gzmsoqkpif.eu-west-1.rds.amazonaws.com
+

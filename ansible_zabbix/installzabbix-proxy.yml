@@ -1,0 +1,7 @@
+---
+- name: Install Zabbix Proxy for RHEL 7|8|9
+  hosts: "*"
+  become: true
+
+  roles:
+    - installzabbix-proxy

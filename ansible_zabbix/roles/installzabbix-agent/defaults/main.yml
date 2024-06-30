@@ -1,0 +1,4 @@
+---
+# defaults file for installzabbix-agent
+ansible_become: true
+ansible_become_user: aap_user

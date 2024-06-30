@@ -1,0 +1,4 @@
+---
+# defaults file for installodbc
+installodbc_ansible_become: true
+installodbc_ansible_become_user: root

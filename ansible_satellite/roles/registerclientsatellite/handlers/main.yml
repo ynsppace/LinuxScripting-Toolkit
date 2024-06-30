@@ -1,0 +1,7 @@
+---
+# handlers file for registerClientSatellite
+
+- name: Restart rhsm
+  ansible.builtin.systemd:
+    name: rhsm
+    state: restarted

@@ -1,0 +1,6 @@
+---
+- name: Test ODBC installation using role
+  hosts: localhost
+  remote_user: root
+  roles:
+      - installodbc

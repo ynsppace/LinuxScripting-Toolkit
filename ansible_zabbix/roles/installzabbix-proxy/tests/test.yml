@@ -1,0 +1,6 @@
+---
+- name: "Installation of Zabbix Proxy in RHEL env"
+  hosts: localhost
+  remote_user: root
+  roles:
+    - installzabbix-proxy

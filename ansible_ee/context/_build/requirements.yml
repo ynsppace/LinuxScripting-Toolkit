@@ -1,0 +1,9 @@
+---
+collections:
+  - name: amazon.aws
+  - name: vmware.vmware
+  - name: community.vmware
+  - name: zabbix.zabbix
+  - name: microsoft.ad
+  - name: microsoft.sql
+  - name: ansible.windows

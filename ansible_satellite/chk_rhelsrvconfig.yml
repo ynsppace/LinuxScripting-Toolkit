@@ -1,0 +1,90 @@
+---
+- name: Check the configuration of RHEL 7|8|9 Server
+  hosts: '*'
+  become: true
+  tasks:
+    - name: Check if firewall is disabled
+      ansible.builtin.systemd: name:firewalld
+        state:started
+      register: firewall_status
+
+    - name: Print firewall status
+      ansible.builtin.debug:
+        msg: "Firewall status: {{ 'disabled' if firewall_status.failed else 'enabled' }}"
+
+    - name: Check SELinux status
+      ansible.builtin.shell: sestatus | awk '/SELinux status:/ {print $3}'
+      register: selinux_status
+      ignore_errors: yes
+
+    - name: Print SELinux status
+      ansible.builtin.debug:
+        msg: 'SELinux status: {{ selinux_status.stdout }}'
+
+    - name: Fail if SELinux is enabled
+      ansible.builtin.debug:
+        msg: 'SELinux is enabled. Please disable SELinux to proceed.'
+      when: selinux_status.stdout != "disabled"
+
+    - name: Check if Zabbix Agent is running
+      ansible.builtin.service:
+        name: zabbix-agent
+        state: started
+      register: service_status
+      ignore_errors: yes
+
+    - name: Print Zabbix Agent status
+      ansible.builtin.debug:
+        msg: >
+          Zabbix Agent is {{
+          'running' if service_status is succeeded
+          else 'not running'
+          }}
+      ignore_errors: yes
+
+    - name: Check if Ascendi CA certificates are installed
+      ansible.posix.at:
+        path: '/etc/pki/ca-trust/source/anchors/{{ item }}'
+        loop:
+          - Ascendi_Intermediate_CA.cer.pem
+          - Ascendi_Issuing_CA.cer.pem
+          - Ascendi_Root_CA.crt.pem
+        register: ca_cert_status
+      ignore_errors: yes
+
+    - name: Print CA certificates status
+      ansible.builtin.debug:
+        msg: >
+          "CA certificate {{ item.item }} installed: 
+          {% if item.stat.exists %}
+            Yes
+          {% else %}
+            No - Error: Certificate file not found
+          {% endif %}"
+        loop: '{{ ca_cert_status.results }}'
+      ignore_errors: yes
+
+    - name: Check if Forticlient, FortiEDR, FortiSIEM are installed
+      ansible.builtin.shell: rpm -q forticlient fortiedr fortisiem
+      register: fortinet_status
+      ignore_errors: yes
+
+    - name: Print Fortinet installation status
+      ansible.builtin.debug:
+        msg: |
+          Forticlient: {{ "installed" if "forticlient" in fortinet_status.stdout else "not installed" }}
+          FortiEDR: {{ "installed" if "fortiedr" in fortinet_status.stdout else "not installed" }}
+          FortiSIEM: {{ "installed" if "fortisiem" in fortinet_status.stdout else "not installed" }}
+        ignore_errors: yes
+
+    - name: Check if User InsightVM is configured
+      ansible.builtin.shell: id imdisc && sudo -l -U imdisc
+      register: imdisc_user
+      ignore_errors: yes
+
+    - name: Print imdisc user status
+      ansible.builtin.debug:
+        msg: |
+          imdisc user exists: {{ "imdisc" in imdisc_user.stdout }}
+          imdisc user has sudo privileges: {{ imdisc_user.stdout | search('allowed commands') }}
+        ignore_errors: yes

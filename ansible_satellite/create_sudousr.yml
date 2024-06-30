@@ -1,0 +1,20 @@
+---
+- name: Create a new user with sudo permissions
+  hosts: "*"
+  become: true  # Run tasks with elevated privileges (sudo)
+
+  vars_files:
+    - user_vars.yml  # Load external variables file
+
+  tasks:
+    - name: Create a new user
+      ansible.builtin.user:
+        name: "{{ new_username }}"
+        password: "{{ new_password | password_hash('sha512') }}"
+        state: present
+
+    - name: Grant sudo permissions to the new user
+      ansible.builtin.lineinfile:
+        dest: /etc/sudoers
+        insertafter: '^root\s+ALL='
+        line: "{{ new_username }} ALL=(ALL) ALL"

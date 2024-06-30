@@ -1,0 +1,19 @@
+#Steps to build a execution environment
+#Criar o environment isolado, para não mexer em packages da vm local
+python -m venv myenv
+source myenv/bin/activate
+
+1.Realizar o build da imagem
+ansible-builder build --tag ee-custom-ascendi
+
+2. Verificar como ficou a tag da imagem
+podman images
+
+3. Colocar a tag na imagem conforme o que está descrito no repositório do ansiblehub
+podman tag localhost/ee-custom-ascendi ansiblehub.ascendi.pt/ee-custom-ascendi:latest
+
+4. Realizar login no ansiblehub.ascendi.pt
+podman login ansiblehub.ascendi.pt
+
+5. Realizar o push da imagem para o repositório
+podman push ansiblehub.ascendi.pt/ee-custom-ascendi:latest

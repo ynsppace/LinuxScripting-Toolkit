@@ -1,0 +1,29 @@
+---
+- name: Install Zabbix Proxy package
+  ansible.builtin.package:
+    name: zabbix-proxy-sqlite3
+    state: present
+
+- name: Copy Zabbix Proxy config file
+  ansible.builtin.copy:
+    src: "{{ role_path }}/files/zabbix_proxy.conf"
+    dest: /etc/zabbix/zabbix_proxy.conf
+    mode: '0644'
+
+- name: Add Server parameter to Zabbix Proxy config
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_proxy.conf
+    line: "Server={{ zabbix_server }}"
+    insertafter: EOF
+
+- name: Add Hostname parameter to Zabbix Proxy config
+  ansible.builtin.lineinfile:
+    path: /etc/zabbix/zabbix_proxy.conf
+    line: "Hostname={{ zabbix_proxy_hostname }}"
+    insertafter: EOF
+
+- name: Enable and start Zabbix Proxy service
+  ansible.builtin.service:
+    name: zabbix-proxy
+    state: started
+    enabled: true

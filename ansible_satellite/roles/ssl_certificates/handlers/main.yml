@@ -1,0 +1,6 @@
+---
+# handlers file for ssl_certificates
+- name: Update CA Trust
+  ansible.builtin.command:
+    cmd: update-ca-trust
+  changed_when: false

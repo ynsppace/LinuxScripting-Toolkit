@@ -1,0 +1,4 @@
+---
+# defaults file for registerClientSatellite
+registerclientsatellite_ansible_become: true
+registerclientsatellite_ansible_become_user: aap_user
