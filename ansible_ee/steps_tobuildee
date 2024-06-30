@@ -1,3 +1,6 @@
+
+#REMINDER
+
 #Steps to build a execution environment
 #Criar o environment isolado, para não mexer em packages da vm local
 python -m venv myenv

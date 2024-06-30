@@ -42,13 +42,13 @@
           }}
       ignore_errors: yes
 
-    - name: Check if Ascendi CA certificates are installed
+    - name: Check if CA certificates are installed
       ansible.posix.at:
         path: '/etc/pki/ca-trust/source/anchors/{{ item }}'
         loop:
-          - Ascendi_Intermediate_CA.cer.pem
-          - Ascendi_Issuing_CA.cer.pem
-          - Ascendi_Root_CA.crt.pem
+          - cert1_Intermediate_CA.cer.pem
+          - cert2_Issuing_CA.cer.pem
+          - cert3_Root_CA.crt.pem
         register: ca_cert_status
       ignore_errors: yes
 

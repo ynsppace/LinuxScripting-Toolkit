@@ -1,6 +1,6 @@
 # vars file for ssl_certificates
 ---
 ssl_certificates_cert_files:
-  - Ascendi_Root_CA.crt
-  - Ascendi_Intermediate_CA.cer
-  - Ascendi_Issuing_CA.cer
+  - cert3_Root_CA.crt
+  - cert1_Intermediate_CA.cer
+  - cert2_Issuing_CA.cer
