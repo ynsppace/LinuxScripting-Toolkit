@@ -1,0 +1,15 @@
+#######################################################################################################################
+#                                                                                                                     #
+# Procedure to configure Datacenter Licensing for RedHAT using Vmware Vsphere Hypervisor                              #
+# Based in https://docs.redhat.com/en/documentation/red_hat_satellite/6.3/html/virtual_instances_guide/introduction   #
+#                                                                                                                     #
+#######################################################################################################################
+
+https://access.redhat.com/documentation/en-us/red_hat_satellite/6.3/html/virtual_instances_guide/index
+1. Seleccionar o local onde se instalará o módulo virt-who (num server á parte ou no próprio server Satellite)
+2. Criação de conta no hypervisor de destino com permissões de read-only.
+3. A criação da config de virt-who pode ser realizada via cmd usando hammer, ou utilizando webui.
+4. Executar o script gerado no hypervisor de destino.
+
+systemctl restart virt-who.service
+systemctl status virt-who.service
