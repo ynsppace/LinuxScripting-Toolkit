@@ -1,0 +1,3 @@
+NOTES - Deploying a single database postgresql
+
+
